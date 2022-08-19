@@ -2,19 +2,31 @@ package testes;
 
 import sistema.ContaCorrente;
 import sistema.CriacaoContaException;
+import sistema.CaixaEletronico;
 
 import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class TesteContaCorrente {
 	
 	private ContaCorrente cc;
+	private CaixaEletronico cx;
+	
+	@BeforeEach
+	public void criaNovaContaCorrente() {
+		cc = new ContaCorrente(12345, 1234, 1000.0f);
+	}
+	
+	@BeforeEach
+	public void criaCaixaEletronico() {
+		cx = new CaixaEletronico(new MockHardware(), new MockServicoRemoto());
+	}
 	
 	@Test
 	public void whenGetContaThenRetornaUmInt() {
-		cc = new ContaCorrente(12345, 1234, 1000.0f);
 		assertEquals(12345, cc.getConta());
 	}
 	
@@ -75,7 +87,6 @@ public class TesteContaCorrente {
 	
 	@Test
 	public void whenSacarValorTotalQueTemNaContaThenSaldo0() {
-		cc = new ContaCorrente(12345, 1234, 1000.0f);
 		boolean result = cc.sacar(1000.0f);
 		assertTrue(result);
 		assertEquals(0.0f, cc.getSaldo());
@@ -83,7 +94,6 @@ public class TesteContaCorrente {
 	
 	@Test
 	public void whenSacarValorAMaisDoQueTemNaContaThenRetornaFalseENaoFazNada() {
-		cc = new ContaCorrente(12345, 1234, 1000.0f);
 		boolean result = cc.sacar(1200.0f);
 		assertFalse(result);
 		assertEquals(1000.0f, cc.getSaldo());
@@ -91,7 +101,6 @@ public class TesteContaCorrente {
 	
 	@Test
 	public void whenSacarValorNegativoThenRetornaFalseENaoFazNada() {
-		cc = new ContaCorrente(12345, 1234, 1000.0f);
 		boolean result = cc.sacar(-1200.0f);
 		assertFalse(result);
 		assertEquals(1000.0f, cc.getSaldo());
@@ -99,7 +108,6 @@ public class TesteContaCorrente {
 	
 	@Test
 	public void whenDeposita500ThenRetornaTrue() {
-		cc = new ContaCorrente(12345, 1234, 1000.0f);
 		boolean result = cc.depositar(500.0f);
 		assertTrue(result);
 		assertEquals(1500.0f, cc.getSaldo());
@@ -107,7 +115,6 @@ public class TesteContaCorrente {
 	
 	@Test
 	public void whenDeposita0ThenRetornaFalse() {
-		cc = new ContaCorrente(12345, 1234, 1000.0f);
 		boolean result = cc.depositar(0.0f);
 		assertFalse(result);
 		assertEquals(1000.0f, cc.getSaldo());
@@ -115,10 +122,14 @@ public class TesteContaCorrente {
 	
 	@Test
 	public void whenDepositaValorNegativoThenRetornaFalseEFazNada() {
-		cc = new ContaCorrente(12345, 1234, 1000.0f);
 		boolean result = cc.depositar(-50.0f);
 		assertFalse(result);
 		assertEquals(1000.0f, cc.getSaldo());
+	}
+	
+	@Test
+	public void whenLogaComNumeroDoCartaoESenhaThenLogaComSucesso() {
+		assertEquals("Usuário autenticado", cx.logar("4321 1234 4321 1234", 3456));
 	}
 	
 	
