@@ -12,4 +12,10 @@ public class TesteContaCorrente {
 		ContaCorrente cc = new ContaCorrente(12345, 1234, 1000.0f);
 		assertEquals(12345, cc.getConta());
 	}
+	
+	@Test
+	public void whenGetSenhaThenRetornaInt() {
+		ContaCorrente cc = new ContaCorrente(12345, 4321, 1000.0f);
+		assertEquals(4321, cc.getSenha());
+	}
 }
