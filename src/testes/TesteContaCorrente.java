@@ -82,10 +82,20 @@ public class TesteContaCorrente {
 	}
 	
 	@Test
-	public void whenSacarValorAMaisDoQueTEmNaContaThenRetornaFalseENaoFazNada() {
+	public void whenSacarValorAMaisDoQueTemNaContaThenRetornaFalseENaoFazNada() {
 		cc = new ContaCorrente(12345, 1234, 1000.0f);
 		boolean result = cc.sacar(1200.0f);
 		assertFalse(result);
 		assertEquals(1000.0f, cc.getSaldo());
 	}
+	
+	@Test
+	public void whenSacarValorNegativoThenRetornaFalseENaoFazNada() {
+		cc = new ContaCorrente(12345, 1234, 1000.0f);
+		boolean result = cc.sacar(-1200.0f);
+		assertFalse(result);
+		assertEquals(1000.0f, cc.getSaldo());
+	}
+	
+	
 }
