@@ -32,5 +32,9 @@ public class MockServicoRemoto implements ServicoRemoto {
 	public void persistirConta(ContaCorrente cc) {
 		contasRegistradas.set(contasRegistradas.indexOf(cc), cc);
 	}
+	
+	public ContaCorrente verifySpecificAccount(int index) {
+		return contasRegistradas.get(index);
+	}
 
 }

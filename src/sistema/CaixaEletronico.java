@@ -25,10 +25,15 @@ public class CaixaEletronico {
 	}
 
 
-	public String sacar(float f) {
-		boolean isOperationSuccedded = contaLogada.sacar(f);
-		hard.entregarDinheiro();
-		return "Retire seu dinheiro";		
+	public String sacar(float valorASerSacado) {
+		if(contaLogada == null) return "Gentileza inserir seu cartão e digitar sua senha";
+		boolean isOperationSuccedded = contaLogada.sacar(valorASerSacado);
+		if(isOperationSuccedded) {
+			serv.persistirConta(contaLogada);
+			hard.entregarDinheiro();
+			return "Retire seu dinheiro";					
+		}
+		return "Saldo insuficiente";
 	}
 
 }

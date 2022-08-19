@@ -45,6 +45,19 @@ class TesteCaixaEletronico {
 	public void whenLogaESacaOValorNaContaThenSacaComSucesso() {
 		cx.logar("3456 8756 9812 2351", 1234);
 		assertEquals("Retire seu dinheiro", cx.sacar(200.0f));
+		assertEquals(1100.0f, msr.verifySpecificAccount(0).getSaldo());
+	}
+	
+	@Test
+	public void whenTentaSacarSemTerLogado() {
+		assertEquals("Gentileza inserir seu cartão e digitar sua senha", cx.sacar(200.0f));
+	}
+	
+	@Test
+	public void whenTentaSacarUmValorMaiorDoQueOQueHaNaConta() {
+		cx.logar("5457 8770 9157 6445", 4321);
+		assertEquals("Saldo insuficiente", cx.sacar(4100.0f));
+		assertEquals(4000.0f, msr.verifySpecificAccount(1).getSaldo());
 	}
 	
 

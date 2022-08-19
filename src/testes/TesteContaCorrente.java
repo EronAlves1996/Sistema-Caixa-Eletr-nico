@@ -2,7 +2,6 @@ package testes;
 
 import sistema.ContaCorrente;
 import sistema.CriacaoContaException;
-import sistema.CaixaEletronico;
 
 import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.*;
@@ -19,8 +18,6 @@ public class TesteContaCorrente {
 	public void criaNovaContaCorrente() {
 		cc = new ContaCorrente(12345, 1234, 1000.0f);
 	}
-	
-	
 	
 	@Test
 	public void whenGetContaThenRetornaUmInt() {
