@@ -34,6 +34,12 @@ public class ContaCorrente {
 		return true;
 	}
 	
+	public boolean depositar(float valorASerDepositado) {
+		if(isNegative(valorASerDepositado) || valorASerDepositado == 0) return false;
+		saldo += valorASerDepositado;
+		return true;
+	}
+	
 	private boolean isNegative(float value) {
 		return value < 0;
 	}

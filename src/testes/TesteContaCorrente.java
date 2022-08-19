@@ -97,6 +97,30 @@ public class TesteContaCorrente {
 		assertEquals(1000.0f, cc.getSaldo());
 	}
 	
+	@Test
+	public void whenDeposita500ThenRetornaTrue() {
+		cc = new ContaCorrente(12345, 1234, 1000.0f);
+		boolean result = cc.depositar(500.0f);
+		assertTrue(result);
+		assertEquals(1500.0f, cc.getSaldo());
+	}
+	
+	@Test
+	public void whenDeposita0ThenRetornaFalse() {
+		cc = new ContaCorrente(12345, 1234, 1000.0f);
+		boolean result = cc.depositar(0.0f);
+		assertFalse(result);
+		assertEquals(1000.0f, cc.getSaldo());
+	}
+	
+	@Test
+	public void whenDepositaValorNegativoThenRetornaFalseEFazNada() {
+		cc = new ContaCorrente(12345, 1234, 1000.0f);
+		boolean result = cc.depositar(-50.0f);
+		assertFalse(result);
+		assertEquals(1000.0f, cc.getSaldo());
+	}
+	
 	
 	
 }
