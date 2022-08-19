@@ -133,7 +133,7 @@ public class TesteContaCorrente {
 	
 	@Test
 	public void whenLogaComNumeroDoCartaoESenhaThenLogaComSucesso() {
-		assertEquals("Usuário autenticado", cx.logar("4321 1234 4321 1234", 3456));
+		assertEquals("Usuário autenticado", cx.logar("3456 8756 9812 2351", 1234));
 	}
 	
 	
