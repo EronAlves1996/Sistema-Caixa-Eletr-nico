@@ -6,10 +6,14 @@ public class ContaCorrente {
 	private int senha;
 	private float saldo;
 
-	public ContaCorrente(int conta, int senha, float saldo) {
+	public ContaCorrente(int conta, int senha, float saldoInicial) {
+		if(conta < 0) throw new CriacaoContaException("Conta não pode ser negativa!");
+		else if(senha > 9999 || senha < 1000) throw new CriacaoContaException("Senha inválida!");
+		else if(saldo < 0) throw new CriacaoContaException("Saldo inicial inválido!");
+
 		this.conta = conta;
 		this.senha = senha;
-		this.saldo = saldo;
+		this.saldo = saldoInicial;
 	}
 
 	public int getConta() {
