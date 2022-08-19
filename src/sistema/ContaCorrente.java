@@ -29,6 +29,7 @@ public class ContaCorrente {
 	}
 
 	public boolean sacar(float valorASerSacado) {
+		if(saldo < valorASerSacado) return false;
 		saldo -= valorASerSacado;
 		return true;
 	}
