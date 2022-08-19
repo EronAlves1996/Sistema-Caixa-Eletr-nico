@@ -14,6 +14,8 @@ public class TesteContaCorrente {
 	
 	private ContaCorrente cc;
 	private CaixaEletronico cx;
+	private MockHardware mh;
+	private MockServicoRemoto msr;
 	
 	@BeforeEach
 	public void criaNovaContaCorrente() {
@@ -22,7 +24,9 @@ public class TesteContaCorrente {
 	
 	@BeforeEach
 	public void criaCaixaEletronico() {
-		cx = new CaixaEletronico(new MockHardware(), new MockServicoRemoto());
+		mh = new MockHardware();
+		msr = new MockServicoRemoto();
+		cx = new CaixaEletronico(mh, msr);
 	}
 	
 	@Test

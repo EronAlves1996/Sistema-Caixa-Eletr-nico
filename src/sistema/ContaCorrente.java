@@ -1,5 +1,7 @@
 package sistema;
 
+import java.util.Objects;
+
 public class ContaCorrente {
 	
 	private int conta;
@@ -51,5 +53,24 @@ public class ContaCorrente {
 	private boolean isSenhaInvalid(int senha) {
 		return senha > 9999 || senha < 1000;
 	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(conta);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ContaCorrente other = (ContaCorrente) obj;
+		return conta == other.conta;
+	}
+	
+	
 
 }
