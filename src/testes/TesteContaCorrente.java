@@ -152,6 +152,12 @@ public class TesteContaCorrente {
 		assertEquals("Não foi possível autenticar o usuário", cx.logar("3456 8756 9812 2351", 1234));
 	}
 	
+	@Test
+	public void whenLogaESacaOValorNaContaThenSacaComSucesso() {
+		cx.logar("3456 8756 9812 2351", 1234);
+		assertEquals("Retire seu dinheiro", cx.sacar(200.0f));
+	}
+	
 	
 	
 }
