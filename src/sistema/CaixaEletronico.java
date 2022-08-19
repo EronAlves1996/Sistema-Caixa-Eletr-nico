@@ -10,12 +10,16 @@ public class CaixaEletronico {
 		this.serv = serv;
 	}
 
+
 	public String logar(String numeroCartao, int senha) {
-		int numeroConta = Integer.parseInt(hard.pegarNumeroContaCartao(numeroCartao));
-		ContaCorrente conta = serv.recuperarConta(numeroConta, senha);
-		if(conta != null) 
-			return "Usuário autenticado";
-		return "Nada";
+		try {
+			int numeroConta = Integer.parseInt(hard.pegarNumeroContaCartao(numeroCartao));
+			ContaCorrente conta = serv.recuperarConta(numeroConta, senha);
+		} catch (Exception e) {
+			return "Não foi possível autenticar o usuário";
+		} 
+		
+		return "Usuário autenticado";
 	}
 
 }

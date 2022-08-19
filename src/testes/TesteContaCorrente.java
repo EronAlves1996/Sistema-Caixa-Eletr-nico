@@ -136,6 +136,22 @@ public class TesteContaCorrente {
 		assertEquals("Usuário autenticado", cx.logar("3456 8756 9812 2351", 1234));
 	}
 	
+	@Test
+	public void whenLogaComSenhaIncorretaThenLogaSemSucesso() {
+		assertEquals("Não foi possível autenticar o usuário", cx.logar("3456 8756 9812 2351", 1235));
+	}
+	
+	@Test
+	public void whenLogaComCartaoIncorretoThenLogaSemSucesso() {
+		assertEquals("Não foi possível autenticar o usuário", cx.logar("3456 8756 9812 2352", 1234));
+	}
+	
+	@Test
+	public void whenLogaComDadosCorretosThenPoremAMaquinaEstaAvariada() {
+		mh.corromper();
+		assertEquals("Não foi possível autenticar o usuário", cx.logar("3456 8756 9812 2351", 1234));
+	}
+	
 	
 	
 }
