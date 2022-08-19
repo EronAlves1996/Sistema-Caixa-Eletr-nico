@@ -64,4 +64,12 @@ public class TesteContaCorrente {
 			new ContaCorrente(25467, 9874, -1.0f);
 		});
 	}
+	
+	@Test
+	public void whenSacarValorQueTemNaContaThenRetornaTrue() {
+		cc = new ContaCorrente(12345, 1234, 1000.0f);
+		boolean result = cc.sacar(500.0f);
+		assertTrue(result);
+		assertEquals(500.0f, cc.getSaldo());
+	}
 }
