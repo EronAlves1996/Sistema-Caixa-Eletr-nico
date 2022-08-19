@@ -18,4 +18,10 @@ public class TesteContaCorrente {
 		ContaCorrente cc = new ContaCorrente(12345, 4321, 1000.0f);
 		assertEquals(4321, cc.getSenha());
 	}
+	
+	@Test
+	public void whenGetSaldoThenRetornaFloat() {
+		ContaCorrente cc = new ContaCorrente(12345, 4321, 1000.0f);
+		assertEquals(1000.0f, cc.getSaldo());
+	}
 }
