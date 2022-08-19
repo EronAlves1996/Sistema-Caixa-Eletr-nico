@@ -7,9 +7,9 @@ public class ContaCorrente {
 	private float saldo;
 
 	public ContaCorrente(int conta, int senha, float saldoInicial) {
-		if(conta < 0) throw new CriacaoContaException("Conta não pode ser negativa!");
-		else if(senha > 9999 || senha < 1000) throw new CriacaoContaException("Senha inválida!");
-		else if(saldoInicial < 0) throw new CriacaoContaException("Saldo inicial inválido!");
+		if(isNegative(conta)) throw new CriacaoContaException("Conta não pode ser negativa!");
+		else if(isSenhaInvalid(senha)) throw new CriacaoContaException("Senha inválida!");
+		else if(isNegative(saldoInicial)) throw new CriacaoContaException("Saldo inicial inválido!");
 
 		this.conta = conta;
 		this.senha = senha;
@@ -29,9 +29,21 @@ public class ContaCorrente {
 	}
 
 	public boolean sacar(float valorASerSacado) {
-		if(saldo < valorASerSacado || valorASerSacado < 0) return false;
+		if(saldo < valorASerSacado || isNegative(valorASerSacado)) return false;
 		saldo -= valorASerSacado;
 		return true;
+	}
+	
+	private boolean isNegative(float value) {
+		return value < 0;
+	}
+	
+	private boolean isNegative(int value) {
+		return value < 0;
+	}
+	
+	private boolean isSenhaInvalid(int senha) {
+		return senha > 9999 || senha < 1000;
 	}
 
 }
