@@ -40,4 +40,20 @@ public class CaixaEletronico {
 		return "Saldo insuficiente";
 	}
 
+
+	public String depositar(float valorASerDepositado) {
+		if(contaLogada == null) return "Gentileza inserir seu cartão e digitar sua senha";
+		boolean isOperationSuccedded = contaLogada.depositar(valorASerDepositado);
+		if(isOperationSuccedded) {
+			try {
+				hard.lerEnvelope();
+				serv.persistirConta(contaLogada);
+				return "Depósito recebido com sucesso";
+			} catch (HardwareException e) {
+				contaLogada.sacar(valorASerDepositado);
+				return "Não foi possível realizar o depósito";
+			}
+		}
+		return "Não foi possível realizar o depósito";	
+	}
 }

@@ -69,4 +69,26 @@ class TesteCaixaEletronico {
 	}
 	
 
+	@Test
+	public void whenTentaDepositarSemTerLogado() {
+		assertEquals("Gentileza inserir seu cartão e digitar sua senha", cx.depositar(200.0f));
+	}
+	
+	 @Test
+	public void whenLogaEDepositaOValorNaContaThenDepositaComSucesso() {
+		cx.logar("3456 8756 9812 2351", 1234);
+		assertEquals("Depósito recebido com sucesso", cx.depositar(200.0f));
+		assertEquals(1500.0f, msr.verifySpecificAccount(0).getSaldo());
+	}
+		
+	
+	@Test
+	public void whenTentaDepositarPoremAMaquinaEstaAvariada() {
+		cx.logar("5457 8770 9157 6445", 4321);
+		mh.corromper();
+		assertEquals("Não foi possível realizar o depósito", cx.depositar(100.0f));
+		assertEquals(4000.0f, msr.verifySpecificAccount(1).getSaldo());
+	}
+	
+
 }
