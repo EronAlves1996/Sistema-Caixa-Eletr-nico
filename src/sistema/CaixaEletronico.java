@@ -24,14 +24,18 @@ public class CaixaEletronico {
 		return "Usuário autenticado";
 	}
 
-
 	public String sacar(float valorASerSacado) {
 		if(contaLogada == null) return "Gentileza inserir seu cartão e digitar sua senha";
 		boolean isOperationSuccedded = contaLogada.sacar(valorASerSacado);
 		if(isOperationSuccedded) {
-			serv.persistirConta(contaLogada);
-			hard.entregarDinheiro();
-			return "Retire seu dinheiro";					
+			try {
+				hard.entregarDinheiro();
+				serv.persistirConta(contaLogada);
+				return "Retire seu dinheiro";
+			} catch (HardwareException e) {
+				contaLogada.depositar(valorASerSacado);
+				return "Não foi possível realizar saque";
+			}					
 		}
 		return "Saldo insuficiente";
 	}

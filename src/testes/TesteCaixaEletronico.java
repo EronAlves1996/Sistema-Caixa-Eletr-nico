@@ -60,5 +60,13 @@ class TesteCaixaEletronico {
 		assertEquals(4000.0f, msr.verifySpecificAccount(1).getSaldo());
 	}
 	
+	@Test
+	public void whenTentaSacarPoremAMaquinaEstaAvariada() {
+		cx.logar("5457 8770 9157 6445", 4321);
+		mh.corromper();
+		assertEquals("Não foi possível realizar saque", cx.sacar(100.0f));
+		assertEquals(4000.0f, msr.verifySpecificAccount(1).getSaldo());
+	}
+	
 
 }
