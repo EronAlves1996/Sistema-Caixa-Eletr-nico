@@ -90,5 +90,15 @@ class TesteCaixaEletronico {
 		assertEquals(4000.0f, msr.verifySpecificAccount(1).getSaldo());
 	}
 	
+	@Test
+	public void whenLogaEPedeOSaldoThenMostraOSaldoComSucesso() {
+		cx.logar("5457 8770 9157 6445", 4321);
+		assertEquals("O saldo é de R$ 4000,00", cx.saldo());
+	}
+	
+	@Test
+	public void wheenPedeSaldoSemLogar() {
+		assertEquals("Gentileza inserir seu cartão e digitar sua senha", cx.saldo());
+	}
 
 }

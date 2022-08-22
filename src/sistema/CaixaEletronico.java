@@ -56,4 +56,10 @@ public class CaixaEletronico {
 		}
 		return "Não foi possível realizar o depósito";	
 	}
+
+
+	public String saldo() {
+		if(contaLogada == null) return "Gentileza inserir seu cartão e digitar sua senha";
+		return String.format("O saldo é de R$ %.2f", contaLogada.getSaldo());
+	}
 }
